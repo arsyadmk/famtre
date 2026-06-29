@@ -8,4 +8,6 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  // CRITICAL: Replace 'famtre-app' with your exact GitHub repository name!
+  base: '/famtre/',
 })
