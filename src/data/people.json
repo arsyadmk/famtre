@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "firstName": "Grandpa Arthur",
+    "lastName": "Pendelton",
+    "gender": "male",
+    "birthDate": "1938-04-12",
+    "isDeceased": true,
+    "deathDate": "2018-11-05",
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1",
+    "spouseIds": [2],
+    "childrenIds": [3]
+  },
+  {
+    "id": 2,
+    "firstName": "Grandma Martha",
+    "lastName": "Pendelton",
+    "maidenName": "Smith",
+    "gender": "female",
+    "birthDate": "1942-08-22",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2",
+    "spouseIds": [1],
+    "childrenIds": [3]
+  },
+  {
+    "id": 3,
+    "firstName": "David",
+    "lastName": "Pendelton",
+    "gender": "male",
+    "birthDate": "1970-01-15",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p3",
+    "fatherId": 1,
+    "motherId": 2,
+    "spouseIds": [],
+    "childrenIds": [4]
+  },
+  {
+    "id": 4,
+    "firstName": "Chloe",
+    "lastName": "Pendelton",
+    "gender": "female",
+    "birthDate": "2002-09-30",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
+    "fatherId": 3,
+    "motherId": null,
+    "spouseIds": [],
+    "childrenIds": []
+  }
+]
