@@ -37,12 +37,21 @@ export default function FamilyNode({ data }) {
           <h4 className="font-bold text-slate-800 text-sm truncate">
             {person.firstName} {person.lastName}
           </h4>
-          {person.maidenName && (
-            <p className="text-[10px] text-slate-400 italic truncate -mt-0.5">née {person.maidenName}</p>
+
+          {person.callName && (
+            <p className="text-xs text-slate-500 italic truncate">
+              "{person.callName}"
+            </p>
           )}
+
+          {person.maidenName && (
+            <p className="text-[10px] text-slate-400 italic truncate -mt-0.5">
+              née {person.maidenName}
+            </p>
+          )}
+
           <div className="flex items-center gap-1 text-[10px] text-slate-500 mt-1">
             <Calendar size={10} className="text-slate-400" />
-            {/* add years old */}
             <span>
               {person.birthDate && (
                 <>{new Date().getFullYear() - new Date(person.birthDate).getFullYear()} years old</>
@@ -54,7 +63,43 @@ export default function FamilyNode({ data }) {
         </div>
       </div>
 
-      <Handle type="source" position={Position.Bottom} className="!bg-slate-400 !w-2 !h-2" />
+      <Handle
+        type="target"
+        id="parent"
+        position={Position.Top}
+        className="!bg-slate-400 !w-2 !h-2"
+      />
+
+      <Handle
+        type="source"
+        id="child"
+        position={Position.Bottom}
+        className="!bg-slate-400 !w-2 !h-2"
+      />
+
+      <Handle
+        type="source"
+        id="spouse-right"
+        position={Position.Right}
+        className="!bg-pink-400 !w-2 !h-2"
+        style={{
+          top: '50%',
+          right: -5,
+          transform: 'translateY(-50%)',
+        }}
+      />
+
+      <Handle
+        type="target"
+        id="spouse-left"
+        position={Position.Left}
+        className="!bg-pink-400 !w-2 !h-2"
+        style={{
+          top: '50%',
+          left: -5,
+          transform: 'translateY(-50%)',
+        }}
+      />
     </div>
   );
 }

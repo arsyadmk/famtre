@@ -1,7 +1,51 @@
 import React, { useMemo } from 'react';
 import { ReactFlow, Background, Controls, MarkerType } from '@xyflow/react';
+import dagre from '@dagrejs/dagre';
 import FamilyNode from './FamilyNode'; 
 import '@xyflow/react/dist/style.css';
+
+const dagreGraph = new dagre.graphlib.Graph();
+
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+const nodeWidth = 220;
+const nodeHeight = 100;
+
+function getLayoutedElements(nodes, edges) {
+  dagreGraph.setGraph({
+    rankdir: 'TB', // Top -> Bottom
+    nodesep: 60,
+    ranksep: 120,
+  });
+
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, {
+      width: nodeWidth,
+      height: nodeHeight,
+    });
+  });
+
+  const layoutEdges = edges.filter(
+      (e) => !e.id.startsWith("spouse-")
+  );
+
+  layoutEdges.forEach((edge) => {
+      dagreGraph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(dagreGraph);
+
+  nodes.forEach((node) => {
+    const pos = dagreGraph.node(node.id);
+
+    node.position = {
+      x: pos.x - nodeWidth / 2,
+      y: pos.y - nodeHeight / 2,
+    };
+  });
+
+  return { nodes, edges };
+}
 
 const nodeTypes = {
   familyNode: FamilyNode,
@@ -18,24 +62,14 @@ export default function TreeCanvas({ people, onSelectPerson }) {
       let x = 250 * index; 
       let y = 300; 
 
-      // FIXED: Checks matching your new integer JSON keys (1, 2, 3, 4)
-      if (person.id === 1 || person.id === 2) {
-        y = 50; // Top Layer (Grandparents)
-        x = person.id === 1 ? 150 : 420;
-      } else if (person.id === 3) {
-        y = 250; // Middle Layer (Parents)
-        x = 285;
-      } else if (person.id === 4) {
-        y = 450; // Bottom Layer (Children)
-        x = 285;
-      }
-
       // 1. Build Node using our custom type (Casting IDs to strings for React Flow)
       generatedNodes.push({
-        id: person.id.toString(),
-        type: 'familyNode', 
-        position: { x, y },
-        data: { person: person } 
+          id: person.id.toString(),
+          type: 'familyNode',
+          position: { x: 0, y: 0 },
+          data: {
+              person,
+          },
       });
 
       // 2. Build Bloodline Connection Edges (Parents -> Children)
@@ -61,16 +95,29 @@ export default function TreeCanvas({ people, onSelectPerson }) {
       person.spouseIds.forEach(spouseId => {
         if (person.id < spouseId) {
           generatedEdges.push({
-            id: `spouse-${person.id.toString()}-${spouseId.toString()}`,
+            id: `spouse-${person.id}-${spouseId}`,
             source: person.id.toString(),
             target: spouseId.toString(),
-            style: { stroke: '#f43f5e', strokeWidth: 2, strokeDasharray: '5,5' },
+
+            sourceHandle: 'spouse-right',
+            targetHandle: 'spouse-left',
+
+            type: 'straight',
+
+            style: {
+              stroke: '#f43f5e',
+              strokeWidth: 2,
+              strokeDasharray: '6 4',
+            },
           });
         }
       });
     });
 
-    return { nodes: generatedNodes, edges: generatedEdges };
+    return getLayoutedElements(
+      generatedNodes,
+      generatedEdges
+    );
   }, [people]);
 
   const onNodeClick = (event, node) => {
@@ -93,3 +140,4 @@ export default function TreeCanvas({ people, onSelectPerson }) {
     </div>
   );
 }
+

@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
-import initialPeople from './data/people.json';
+
+import people from './data/people.json';
+import peopleAc from './data/people_ac.json';
+
 import PersonCard from './components/PersonCard';
 import { User, Users, Heart, X } from 'lucide-react';
 import TreeCanvas from './components/TreeCanvas';
 
+const DATASETS = {
+  default: people,
+  n: peopleAc,
+};
+
 export default function App() {
+  // Get the last part of the URL
+  // /famtre/    -> ""
+  // /famtre/n   -> "n"
+  const datasetKey = window.location.pathname
+    .split('/')
+    .filter(Boolean)
+    .pop();
+  const initialPeople = DATASETS[datasetKey] || DATASETS.default;
+
   const [people] = useState(initialPeople);
+
   const [selectedPerson, setSelectedPerson] = useState(null);
   // Track if the sidebar modal is explicitly open on mobile screens
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

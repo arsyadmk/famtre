@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "callName": "Arsyad",
+    "firstName": "Arsyad Muhammad Khoiri",
+    "lastName": "",
+    "gender": "male",
+    "birthDate": "1996-11-23",
+    "isDeceased": false,
+    "deathDate": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1",
+    "fatherId": 3,
+    "motherId": 4,
+    "spouseIds": [2],
+    "childrenIds": []
+  },
+  {
+    "id": 2,
+    "callName": "Della",
+    "firstName": "Novita Rizkia Della Khairunnisa",
+    "lastName": "",
+    "maidenName": "",
+    "gender": "female",
+    "birthDate": "1999-11-08",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2",
+    "fatherId": 5,
+    "spouseIds": [1],
+    "childrenIds": []
+  },
+  {
+    "id": 3,
+    "callName": "Anang",
+    "firstName": "Anang Wiharyanto",
+    "lastName": "",
+    "gender": "male",
+    "birthDate": "1963-04-04",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p3",
+    "fatherId": null,
+    "motherId": null,
+    "spouseIds": [4],
+    "childrenIds": [1]
+  },
+  {
+    "id": 4,
+    "callName": "Dawim",
+    "firstName": "Siti Dawimah",
+    "lastName": "",
+    "gender": "female",
+    "birthDate": "1963-10-05",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
+    "fatherId": null,
+    "motherId": null,
+    "spouseIds": [3],
+    "childrenIds": [1]
+  },
+  {
+    "id": 5,
+    "callName": "Sunhaji",
+    "firstName": "Sunhaji",
+    "lastName": "",
+    "gender": "male",
+    "birthDate": "1963-10-05",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
+    "fatherId": null,
+    "motherId": null,
+    "spouseIds": [],
+    "childrenIds": [2]
+  }
+]
