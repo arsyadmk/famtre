@@ -67,7 +67,21 @@
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
     "fatherId": null,
     "motherId": null,
-    "spouseIds": [],
+    "spouseIds": [6],
+    "childrenIds": [2]
+  },
+  {
+    "id": 6,
+    "callName": "Ariza",
+    "firstName": "Ariza",
+    "lastName": "",
+    "gender": "female",
+    "birthDate": "1963-10-05",
+    "isDeceased": false,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
+    "fatherId": null,
+    "motherId": null,
+    "spouseIds": [5],
     "childrenIds": [2]
   }
 ]

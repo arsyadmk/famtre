@@ -1,0 +1,160 @@
+[
+  {
+    "id": 1,
+    "generation": 2,
+    "relation": "",
+    "gender": "male",
+    "english": "Grandfather",
+    "indonesian": "Kakek",
+    "javanese": "Simbah Kakung"
+  },
+  {
+    "id": 2,
+    "generation": 2,
+    "relation": "",
+    "gender": "female",
+    "english": "Grandmother",
+    "indonesian": "Nenek",
+    "javanese": "Simbah Putri"
+  },
+  {
+    "id": 3,
+    "generation": 1,
+    "relation": "sibling",
+    "gender": "male",
+    "age": "older",
+    "english": "Uncle",
+    "indonesian": "Paman",
+    "javanese": "Pakde"
+  },
+  {
+    "id": 4,
+    "generation": 1,
+    "relation": "sibling",
+    "gender": "female",
+    "age": "older",
+    "english": "Aunt",
+    "indonesian": "Bibi",
+    "javanese": "Bude"
+  },
+  {
+    "id": 5,
+    "generation": 1,
+    "relation": "sibling",
+    "gender": "male",
+    "age": "younger",
+    "english": "Uncle",
+    "indonesian": "Paman",
+    "javanese": "Om"
+  },
+  {
+    "id": 6,
+    "generation": 1,
+    "relation": "sibling",
+    "gender": "female",
+    "age": "younger",
+    "english": "Aunt",
+    "indonesian": "Bibi",
+    "javanese": "Bulik"
+  },
+  {
+    "id": 7,
+    "generation": 1,
+    "relation": "direct",
+    "gender": "male",
+    "age": "",
+    "english": "Father",
+    "indonesian": "Ayah",
+    "javanese": "Bapak"
+  },
+  {
+    "id": 8,
+    "generation": 1,
+    "relation": "direct",
+    "gender": "female",
+    "age": "",
+    "english": "Mother",
+    "indonesian": "Ibu",
+    "javanese": "Ibu"
+  },
+  {
+    "id": 9,
+    "generation": 0,
+    "relation": "",
+    "gender": "male",
+    "age": "",
+    "english": "Husband",
+    "indonesian": "Suami",
+    "javanese": "Bojo"
+  },
+  {
+    "id": 10,
+    "generation": 0,
+    "relation": "",
+    "gender": "female",
+    "age": "",
+    "english": "Wife",
+    "indonesian": "Istri",
+    "javanese": "Bojo"
+  },
+  {
+    "id": 11,
+    "generation": 0,
+    "relation": "",
+    "gender": "male",
+    "age": "",
+    "english": "Brother",
+    "indonesian": "Saudara Laki-laki",
+    "javanese": "Sedulur Lanang"
+  },
+  {
+    "id": 12,
+    "generation": 0,
+    "relation": "",
+    "gender": "female",
+    "age": "",
+    "english": "Sister",
+    "indonesian": "Saudara Perempuan",
+    "javanese": "Sedulur Wedok"
+  },
+  {
+    "id": 13,
+    "generation": -1,
+    "relation": "direct",
+    "gender": "male",
+    "age": "",
+    "english": "Son",
+    "indonesian": "Anak Laki-laki",
+    "javanese": "Tole"
+  },
+  {
+    "id": 14,
+    "generation": -1,
+    "relation": "direct",
+    "gender": "female",
+    "age": "",
+    "english": "Daughter",
+    "indonesian": "Anak Perempuan",
+    "javanese": "Genduk"
+  },
+  {
+    "id": 15,
+    "generation": -1,
+    "relation": "sibling",
+    "gender": "male",
+    "age": "",
+    "english": "Son",
+    "indonesian": "Keponakan Laki-laki",
+    "javanese": "Tole"
+  },
+  {
+    "id": 16,
+    "generation": -1,
+    "relation": "sibling",
+    "gender": "female",
+    "age": "",
+    "english": "Daughter",
+    "indonesian": "Keponakan Perempuan",
+    "javanese": "Genduk"
+  }
+]

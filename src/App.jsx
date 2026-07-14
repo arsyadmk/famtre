@@ -1,36 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
-import people from './data/people.json';
+import LoginOverlay from "./components/LoginOverlay";
+
+import peopleDefault from './data/people.json';
 import peopleAc from './data/people_ac.json';
+import alias from './data/alias.json';
 
 import PersonCard from './components/PersonCard';
 import { User, Users, Heart, X } from 'lucide-react';
 import TreeCanvas from './components/TreeCanvas';
 
 const DATASETS = {
-  default: people,
+  default: peopleDefault,
   n: peopleAc,
 };
 
 export default function App() {
-  // Get the last part of the URL
-  // /famtre/    -> ""
-  // /famtre/n   -> "n"
-  const datasetKey = window.location.pathname
-    .split('/')
-    .filter(Boolean)
-    .pop();
-  const initialPeople = DATASETS[datasetKey] || DATASETS.default;
-
-  const [people] = useState(initialPeople);
+  // 1. All hooks must be grouped together at the top of the component
+  const [loginData, setLoginData] = useState(() => {
+    const saved = localStorage.getItem("famtre-login");
+    return saved ? JSON.parse(saved) : null;
+  });
 
   const [selectedPerson, setSelectedPerson] = useState(null);
-  // Track if the sidebar modal is explicitly open on mobile screens
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // 2. We run useMemo here so it ALWAYS executes (preserving Hook order), 
+  // but we return an empty array if loginData is not yet available.
+  const people = useMemo(() => {
+    if (!loginData) return []; // Return placeholder empty data until logged in
+
+    let fallbackDataset = peopleDefault;
+    if (loginData.familyName === "khoir") {
+      fallbackDataset = peopleAc;
+    }
+
+    const datasetKey = window.location.pathname
+      .split('/')
+      .filter(Boolean)
+      .pop();
+
+    return DATASETS[datasetKey] || fallbackDataset;
+  }, [loginData]);
+
+  // 3. NOW it is safe to perform the early return for the UI
+  if (!loginData) {
+    return (
+      <LoginOverlay
+        onComplete={(data) => {
+          localStorage.setItem("famtre-login", JSON.stringify(data));
+          setLoginData(data);
+        }}
+      />
+    );
+  }
 
   const handleSelectPerson = (person) => {
     setSelectedPerson(person);
-    setIsSidebarOpen(true); // Auto-open the drawer when clicking a person
+    setIsSidebarOpen(true);
   };
 
   const findPersonName = (id) => {
@@ -41,35 +68,27 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 h-screen overflow-hidden">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 px-6 py-4 shadow-sm shrink-0">
+      <header className="bg-white border-b border-slate-200 px-6 py-4 shadow-sm shrink-0 flex items-center justify-between">
         <h1 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-          <Users className="text-blue-600" /> Custom Family Tree App
+          <Users className="text-blue-600" /> Family Tree App
         </h1>
+        <button
+          onClick={() => {
+            localStorage.removeItem("famtre-login");
+            window.location.reload();
+          }}
+          className="p-1.5 px-3 bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-medium rounded transition-colors"
+        >
+          Out
+        </button>
       </header>
 
       {/* Main Layout */}
       <div className="flex-1 flex overflow-hidden relative">
-        
-        {/* Main List Grid */}
-        {/* <main className="flex-1 p-6 overflow-y-auto">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">All Family Members</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {people.map(person => (
-              <PersonCard 
-                key={person.id} 
-                person={person} 
-                onSelect={handleSelectPerson} 
-                isActive={selectedPerson?.id === person.id}
-              />
-            ))}
-          </div>
-        </main> */}
-        {/* Main Workspace Canvas */}
         <main className="flex-1 h-full relative">
           <TreeCanvas people={people} onSelectPerson={handleSelectPerson} />
         </main>
 
-        {/* Backdrop overlay for mobile to tap out of the sidebar */}
         {isSidebarOpen && (
           <div 
             onClick={() => setIsSidebarOpen(false)}
@@ -77,14 +96,11 @@ export default function App() {
           />
         )}
 
-        {/* Responsive Drawer/Sidebar */}
         <aside className={`
           fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-white border-l border-slate-200 p-6 shadow-2xl flex flex-col gap-6 overflow-y-auto transition-transform duration-300 ease-in-out
           md:static md:translate-x-0 md:shadow-xl shrink-0
           ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
         `}>
-          
-          {/* Header section with mobile close button */}
           <div className="flex items-center justify-between border-b border-slate-100 pb-4 shrink-0">
             <h3 className="font-semibold text-slate-700">Member Details</h3>
             <button 
@@ -98,10 +114,9 @@ export default function App() {
 
           {selectedPerson ? (
             <div className="flex-1">
-              {/* Inside the sidebar profile card of src/App.jsx */}
               <div className="text-center border-b border-slate-100 pb-6">
                 <img 
-                  src={selectedPerson.avatarUrl} // <-- Read straight from JSON link!
+                  src={selectedPerson.avatarUrl} 
                   className="w-24 h-24 rounded-full mx-auto bg-slate-50 mb-3" 
                   alt="" 
                 />
@@ -109,7 +124,6 @@ export default function App() {
                 <p className="text-sm text-slate-500 capitalize">{selectedPerson.gender}</p>
               </div>
 
-              {/* Immediate Relationships section */}
               <div className="mt-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1">
                   <Heart size={14} className="text-red-400"/> Immediate Family Links
