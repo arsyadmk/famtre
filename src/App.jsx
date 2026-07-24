@@ -3,12 +3,19 @@ import React, { useState, useMemo } from 'react';
 import LoginOverlay from "./components/LoginOverlay";
 
 import peopleDefault from './data/people.json';
-import peopleAc from './data/people_ac.json';
+import peopleAcM from './data/people_ac.json';
+import peopleAc1 from './data/people_ac_1.json';
 import alias from './data/alias.json';
 
 import PersonCard from './components/PersonCard';
 import { User, Users, Heart, X, LogOut } from 'lucide-react';
 import TreeCanvas from './components/TreeCanvas';
+
+// const peopleAc = peopleAcM
+// const peopleAc = [peopleAcM, peopleAc1];
+const peopleAc = peopleAcM.concat(peopleAc1);
+
+// console.log(peopleAc);
 
 const DATASETS = {
   default: peopleDefault,
@@ -40,7 +47,7 @@ export default function App() {
       .filter(Boolean)
       .pop();
 
-      console.log(loginData.personId, loginData.familyName, loginData.personName);
+      // console.log(loginData.personId, loginData.familyName, loginData.personName);
       return DATASETS[datasetKey] || fallbackDataset;
   }, [loginData]);
 

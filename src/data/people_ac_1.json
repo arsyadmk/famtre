@@ -1,0 +1,17 @@
+[
+  {
+    "id": 99,
+    "callName": "Suharjono",
+    "firstName": "Suharjono Al Siswo Suharjono",
+    "lastName": "",
+    "gender": "male",
+    "birthDate": "1950-11-23",
+    "isDeceased": false,
+    "deathDate": "2012-11-23",
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1",
+    "fatherId": null,
+    "motherId": null,
+    "spouseIds": [],
+    "childrenIds": [3]
+  }
+]

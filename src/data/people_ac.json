@@ -25,6 +25,7 @@
     "isDeceased": false,
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2",
     "fatherId": 5,
+    "motherId": 6,
     "spouseIds": [1],
     "childrenIds": []
   },
@@ -37,7 +38,7 @@
     "birthDate": "1963-04-04",
     "isDeceased": false,
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p3",
-    "fatherId": null,
+    "fatherId": 99,
     "motherId": null,
     "spouseIds": [4],
     "childrenIds": [1]
