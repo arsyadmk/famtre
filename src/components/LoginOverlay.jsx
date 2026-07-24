@@ -3,8 +3,9 @@ import React, { useState, useMemo } from "react";
 export default function LoginOverlay({ onComplete, suggestedPeople = [] }) {
   const [familyName, setFamilyName] = useState("");
   const [personName, setPersonName] = useState("");
-  const [personId, setPersonId] = useState(null); // <-- NEW STATE to track ID
+  const [personId, setPersonId] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [errors, setErrors] = useState({ familyName: false, personName: false });
 
   const suggestions = useMemo(() => {
     const query = personName.trim().toLowerCase();
@@ -26,25 +27,34 @@ export default function LoginOverlay({ onComplete, suggestedPeople = [] }) {
   const handleSelectSuggestion = (person) => {
     const fullName = `${person.firstName} ${person.lastName}`;
     setPersonName(fullName);
-    setPersonId(person.id); // <-- Save the ID when option clicked
+    setPersonId(person.id);
     setShowSuggestions(false);
+    setErrors((prev) => ({ ...prev, personName: false }));
 
     if (!familyName.trim()) {
       setFamilyName("khoir");
+      setErrors((prev) => ({ ...prev, familyName: false }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!familyName.trim() || !personName.trim()) {
+    const isFamilyNameEmpty = !familyName.trim();
+    const isPersonNameEmpty = !personName.trim();
+
+    if (isFamilyNameEmpty || isPersonNameEmpty) {
+      setErrors({
+        familyName: isFamilyNameEmpty,
+        personName: isPersonNameEmpty,
+      });
       return;
     }
 
     const loginData = {
       familyName: familyName.trim(),
       personName: personName.trim(),
-      personId: personId, // <-- Include the ID in the login object
+      personId: personId,
       createdAt: new Date().toISOString(),
     };
 
@@ -68,10 +78,20 @@ export default function LoginOverlay({ onComplete, suggestedPeople = [] }) {
             <input
               type="text"
               value={familyName}
-              onChange={(e) => setFamilyName(e.target.value)}
+              onChange={(e) => {
+                setFamilyName(e.target.value);
+                if (errors.familyName) setErrors((prev) => ({ ...prev, familyName: false }));
+              }}
               placeholder="Example: Smith"
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 ${
+                errors.familyName
+                  ? "border-red-500 focus:ring-red-500 bg-red-50/30"
+                  : "border-slate-300 focus:ring-blue-500"
+              }`}
             />
+            {errors.familyName && (
+              <p className="text-xs text-red-500 mt-1">Family name is required.</p>
+            )}
           </div>
 
           <div className="relative">
@@ -83,13 +103,21 @@ export default function LoginOverlay({ onComplete, suggestedPeople = [] }) {
               value={personName}
               onChange={(e) => {
                 setPersonName(e.target.value);
-                setPersonId(null); // <-- Reset ID to null if they keep custom typing
+                setPersonId(null);
                 setShowSuggestions(true);
+                if (errors.personName) setErrors((prev) => ({ ...prev, personName: false }));
               }}
               onFocus={() => setShowSuggestions(true)}
               placeholder="Example: John Smith"
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 ${
+                errors.personName
+                  ? "border-red-500 focus:ring-red-500 bg-red-50/30"
+                  : "border-slate-300 focus:ring-blue-500"
+              }`}
             />
+            {errors.personName && (
+              <p className="text-xs text-red-500 mt-1">Person name is required.</p>
+            )}
 
             {showSuggestions && suggestions.length > 0 && (
               <ul className="absolute z-10 w-full mt-1 max-h-60 overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
