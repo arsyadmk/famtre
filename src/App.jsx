@@ -1,21 +1,14 @@
 import React, { useState, useMemo } from 'react';
-
 import LoginOverlay from "./components/LoginOverlay";
+import TreeCanvas from './components/TreeCanvas';
+import MemberSidebar from './components/MemberSidebar'; // <-- Import new component
 
 import peopleDefault from './data/people.json';
 import peopleAcM from './data/people_ac.json';
 import peopleAc1 from './data/people_ac_1.json';
-import alias from './data/alias.json';
+import { Users, LogOut } from 'lucide-react';
 
-import PersonCard from './components/PersonCard';
-import { User, Users, Heart, X, LogOut } from 'lucide-react';
-import TreeCanvas from './components/TreeCanvas';
-
-// const peopleAc = peopleAcM
-// const peopleAc = [peopleAcM, peopleAc1];
 const peopleAc = peopleAcM.concat(peopleAc1);
-
-// console.log(peopleAc);
 
 const DATASETS = {
   default: peopleDefault,
@@ -23,7 +16,6 @@ const DATASETS = {
 };
 
 export default function App() {
-  // 1. All hooks must be grouped together at the top of the component
   const [loginData, setLoginData] = useState(() => {
     const saved = localStorage.getItem("famtre-login");
     return saved ? JSON.parse(saved) : null;
@@ -32,10 +24,8 @@ export default function App() {
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // 2. We run useMemo here so it ALWAYS executes (preserving Hook order), 
-  // but we return an empty array if loginData is not yet available.
   const people = useMemo(() => {
-    if (!loginData) return []; // Return placeholder empty data until logged in
+    if (!loginData) return [];
 
     let fallbackDataset = peopleDefault;
     if (loginData.familyName === "khoir") {
@@ -47,15 +37,13 @@ export default function App() {
       .filter(Boolean)
       .pop();
 
-      // console.log(loginData.personId, loginData.familyName, loginData.personName);
-      return DATASETS[datasetKey] || fallbackDataset;
+    return DATASETS[datasetKey] || fallbackDataset;
   }, [loginData]);
 
-  // 3. NOW it is safe to perform the early return for the UI
   if (!loginData) {
     return (
       <LoginOverlay
-        suggestedPeople={peopleAc} // <-- Pass the dataset directly to login page
+        suggestedPeople={peopleAc}
         onComplete={(data) => {
           localStorage.setItem("famtre-login", JSON.stringify(data));
           setLoginData(data);
@@ -69,11 +57,6 @@ export default function App() {
     setIsSidebarOpen(true);
   };
 
-  const findPersonName = (id) => {
-    const found = people.find(p => p.id === id);
-    return found ? `${found.firstName} ${found.lastName}` : 'Unknown';
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 h-screen overflow-hidden">
       {/* Header */}
@@ -83,7 +66,6 @@ export default function App() {
           <span className="hidden sm:inline">Family Tree App</span>
         </h1>
 
-        {/* Unified Account Badge */}
         <div className="flex items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-sm">
           <span className="px-3.5 py-2 text-sm font-medium text-slate-600 border-r border-slate-200 max-w-[140px] sm:max-w-none truncate">
             👋 Hi, {loginData.personName.split(' ')[0]}
@@ -108,60 +90,13 @@ export default function App() {
           <TreeCanvas people={people} onSelectPerson={handleSelectPerson} />
         </main>
 
-        {isSidebarOpen && (
-          <div 
-            onClick={() => setIsSidebarOpen(false)}
-            className="fixed inset-0 bg-black/40 md:hidden z-40 transition-opacity"
-          />
-        )}
-
-        <aside className={`
-          fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-white border-l border-slate-200 p-6 shadow-2xl flex flex-col gap-6 overflow-y-auto transition-transform duration-300 ease-in-out
-          md:static md:translate-x-0 md:shadow-xl shrink-0
-          ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
-        `}>
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4 shrink-0">
-            <h3 className="font-semibold text-slate-700">Member Details</h3>
-            <button 
-              onClick={() => setIsSidebarOpen(false)}
-              className="p-1 hover:bg-slate-100 rounded-lg md:hidden text-slate-500"
-              aria-label="Close details"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
-          {selectedPerson ? (
-            <div className="flex-1">
-              <div className="text-center border-b border-slate-100 pb-6">
-                <img 
-                  src={selectedPerson.avatarUrl} 
-                  className="w-24 h-24 rounded-full mx-auto bg-slate-50 mb-3" 
-                  alt="" 
-                />
-                <h2 className="text-xl font-bold text-slate-800">{selectedPerson.firstName} {selectedPerson.lastName}</h2>
-                <p className="text-sm text-slate-500 capitalize">{selectedPerson.gender}</p>
-              </div>
-
-              <div className="mt-6">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1">
-                  <Heart size={14} className="text-red-400"/> Immediate Family Links
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <p><span className="text-slate-500">Father:</span> {selectedPerson.fatherId ? findPersonName(selectedPerson.fatherId) : 'None Linked'}</p>
-                  <p><span className="text-slate-500">Mother:</span> {selectedPerson.motherId ? findPersonName(selectedPerson.motherId) : 'None Linked'}</p>
-                  <p><span className="text-slate-500">Spouses:</span> {selectedPerson.spouseIds.length > 0 ? selectedPerson.spouseIds.map(id => findPersonName(id)).join(', ') : 'None Linked'}</p>
-                  <p><span className="text-slate-500">Children:</span> {selectedPerson.childrenIds.length > 0 ? selectedPerson.childrenIds.map(id => findPersonName(id)).join(', ') : 'None Linked'}</p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-center text-slate-400">
-              <User size={48} strokeWidth={1} className="mb-2"/>
-              <p className="text-sm">Select a family member to view their profile details and relationships.</p>
-            </div>
-          )}
-        </aside>
+        {/* Separated Sidebar Component */}
+        <MemberSidebar
+          selectedPerson={selectedPerson}
+          people={people}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
       </div>
     </div>
   );

@@ -92,26 +92,18 @@ export default function TreeCanvas({ people, onSelectPerson }) {
       }
 
       // 3. Build Marriage Spousal Edges
-      person.spouseIds.forEach(spouseId => {
-        if (person.id < spouseId) {
-          generatedEdges.push({
-            id: `spouse-${person.id}-${spouseId}`,
-            source: person.id.toString(),
-            target: spouseId.toString(),
-
-            sourceHandle: 'spouse-right',
-            targetHandle: 'spouse-left',
-
-            type: 'straight',
-
-            style: {
-              stroke: '#f43f5e',
-              strokeWidth: 2,
-              strokeDasharray: '6 4',
-            },
-          });
-        }
-      });
+      // Replace old spouse loop with single-directional check
+      if (person.spouseId) {
+        generatedEdges.push({
+          id: `spouse-${person.id}-${person.spouseId}`,
+          source: person.id.toString(),
+          target: person.spouseId.toString(),
+          sourceHandle: 'spouse-right',
+          targetHandle: 'spouse-left',
+          type: 'straight',
+          style: { stroke: '#f43f5e', strokeWidth: 2, strokeDasharray: '6 4' },
+        });
+      }
     });
 
     return getLayoutedElements(

@@ -6,13 +6,11 @@
     "lastName": "",
     "gender": "male",
     "birthDate": "1996-11-23",
-    "isDeceased": false,
     "deathDate": null,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1",
     "fatherId": 3,
     "motherId": 4,
-    "spouseIds": [2],
-    "childrenIds": []
+    "spouseId": 2,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1"
   },
   {
     "id": 2,
@@ -22,12 +20,9 @@
     "maidenName": "",
     "gender": "female",
     "birthDate": "1999-11-08",
-    "isDeceased": false,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2",
     "fatherId": 5,
     "motherId": 6,
-    "spouseIds": [1],
-    "childrenIds": []
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2"
   },
   {
     "id": 3,
@@ -36,12 +31,9 @@
     "lastName": "",
     "gender": "male",
     "birthDate": "1963-04-04",
-    "isDeceased": false,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p3",
     "fatherId": 99,
     "motherId": null,
-    "spouseIds": [4],
-    "childrenIds": [1]
+    "spouseId": [4]
   },
   {
     "id": 4,
@@ -50,12 +42,9 @@
     "lastName": "",
     "gender": "female",
     "birthDate": "1963-10-05",
-    "isDeceased": false,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
     "fatherId": null,
     "motherId": null,
-    "spouseIds": [3],
-    "childrenIds": [1]
+    "spouseId": [3]
   },
   {
     "id": 5,
@@ -64,12 +53,9 @@
     "lastName": "",
     "gender": "male",
     "birthDate": "1973-10-08",
-    "isDeceased": false,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
     "fatherId": null,
     "motherId": null,
-    "spouseIds": [6],
-    "childrenIds": [2]
+    "spouseId": [6]
   },
   {
     "id": 6,
@@ -78,11 +64,8 @@
     "lastName": "",
     "gender": "female",
     "birthDate": "1978-01-13",
-    "isDeceased": false,
-    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p4",
     "fatherId": null,
     "motherId": null,
-    "spouseIds": [5],
-    "childrenIds": [2]
+    "spouseId": [5]
   }
 ]
