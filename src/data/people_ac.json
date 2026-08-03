@@ -10,6 +10,7 @@
     "fatherId": 3,
     "motherId": 4,
     "spouseId": 2,
+    "generation":0,
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1"
   },
   {
@@ -22,6 +23,7 @@
     "birthDate": "1999-11-08",
     "fatherId": 5,
     "motherId": 6,
+    "generation":0,
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=woman-p2"
   },
   {
@@ -33,7 +35,8 @@
     "birthDate": "1963-04-04",
     "fatherId": 99,
     "motherId": null,
-    "spouseId": [4]
+    "spouseId": 4,
+    "generation":-1
   },
   {
     "id": 4,
@@ -44,7 +47,8 @@
     "birthDate": "1963-10-05",
     "fatherId": null,
     "motherId": null,
-    "spouseId": [3]
+    "spouseId": null,
+    "generation":-1
   },
   {
     "id": 5,
@@ -55,7 +59,8 @@
     "birthDate": "1973-10-08",
     "fatherId": null,
     "motherId": null,
-    "spouseId": [6]
+    "spouseId": 6,
+    "generation":-1
   },
   {
     "id": 6,
@@ -66,6 +71,7 @@
     "birthDate": "1978-01-13",
     "fatherId": null,
     "motherId": null,
-    "spouseId": [5]
+    "spouseId": null,
+    "generation":-1
   }
 ]

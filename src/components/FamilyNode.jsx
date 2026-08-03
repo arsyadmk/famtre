@@ -20,10 +20,15 @@ export default function FamilyNode({ data }) {
     : calculateAge(person.birthDate);
 
   return (
-    <div className={`p-3 bg-white rounded-xl shadow-md border-2 min-w-[220px] transition-all hover:shadow-lg
+    <div className={`p-3 bg-white rounded-xl shadow-md border-2 min-w-[220px] transition-all hover:shadow-lg relative
       ${isMale ? 'border-blue-400 bg-gradient-to-br from-white to-blue-50/20' : 'border-pink-400 bg-gradient-to-br from-white to-pink-50/20'}
     `}>
-      <Handle type="target" position={Position.Top} className="!bg-slate-400 !w-2 !h-2" />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="target-top"
+        className="!bg-slate-400 !w-3 !h-3"
+      />
 
       <div className="flex items-center gap-3">
         <img 
@@ -65,41 +70,26 @@ export default function FamilyNode({ data }) {
       </div>
 
       <Handle
-        type="target"
-        id="parent"
-        position={Position.Top}
-        className="!bg-slate-400 !w-2 !h-2"
-      />
-
-      <Handle
         type="source"
-        id="child"
         position={Position.Bottom}
-        className="!bg-slate-400 !w-2 !h-2"
+        id="source-bottom"
+        className="!bg-slate-400 !w-3 !h-3"
       />
 
+      {/* SPOUSE HANDLES - Centered vertically at exactly 50% */}
       <Handle
         type="source"
         id="spouse-right"
         position={Position.Right}
-        className="!bg-pink-400 !w-2 !h-2"
-        style={{
-          top: '50%',
-          right: -5,
-          transform: 'translateY(-50%)',
-        }}
+        style={{ top: '50%' }}
+        className="!bg-pink-400 !w-2.5 !h-2.5"
       />
-
       <Handle
         type="target"
         id="spouse-left"
         position={Position.Left}
-        className="!bg-pink-400 !w-2 !h-2"
-        style={{
-          top: '50%',
-          left: -5,
-          transform: 'translateY(-50%)',
-        }}
+        style={{ top: '50%' }}
+        className="!bg-pink-400 !w-2.5 !h-2.5"
       />
     </div>
   );

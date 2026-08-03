@@ -6,8 +6,9 @@
     "gender": "male",
     "birthDate": "1938-04-12",
     "deathDate": "2018-11-05",
+    "generation": 1,
     "spouseId": 2,
-    "avatarUrl": ""
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Arthur"
   },
   {
     "id": 2,
@@ -16,8 +17,9 @@
     "maidenName": "Smith",
     "gender": "female",
     "birthDate": "1942-08-22",
+    "generation": 1,
     "spouseId": null,
-    "avatarUrl": ""
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Martha"
   },
   {
     "id": 3,
@@ -25,17 +27,113 @@
     "lastName": "Pendelton",
     "gender": "male",
     "birthDate": "1970-01-15",
+    "generation": 2,
     "fatherId": 1,
     "motherId": 2,
+    "spouseId": 5,
     "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=man-p1"
   },
   {
     "id": 4,
+    "firstName": "Sarah",
+    "lastName": "Pendelton",
+    "gender": "female",
+    "birthDate": "1973-06-18",
+    "generation": 2,
+    "fatherId": 1,
+    "motherId": 2,
+    "spouseId": 6,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Sarah"
+  },
+  {
+    "id": 5,
+    "firstName": "Elena",
+    "lastName": "Pendelton",
+    "maidenName": "Reyes",
+    "gender": "female",
+    "birthDate": "1972-03-04",
+    "generation": 2,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Elena"
+  },
+  {
+    "id": 6,
+    "firstName": "Michael",
+    "lastName": "Brooks",
+    "gender": "male",
+    "birthDate": "1971-09-12",
+    "generation": 2,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Michael"
+  },
+  {
+    "id": 7,
     "firstName": "Chloe",
     "lastName": "Pendelton",
     "gender": "female",
-    "birthDate": "2002-09-30",
+    "birthDate": "2000-09-30",
+    "generation": 3,
     "fatherId": 3,
-    "avatarUrl": ""
+    "motherId": 5,
+    "spouseId": 10,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Chloe"
+  },
+  {
+    "id": 8,
+    "firstName": "Ethan",
+    "lastName": "Pendelton",
+    "gender": "male",
+    "birthDate": "2003-11-14",
+    "generation": 3,
+    "fatherId": 3,
+    "motherId": 5,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Ethan"
+  },
+  {
+    "id": 9,
+    "firstName": "Lucas",
+    "lastName": "Brooks",
+    "gender": "male",
+    "birthDate": "2005-04-25",
+    "generation": 3,
+    "fatherId": 6,
+    "motherId": 4,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Lucas"
+  },
+  {
+    "id": 10,
+    "firstName": "Julian",
+    "lastName": "Vance",
+    "gender": "male",
+    "birthDate": "1998-12-01",
+    "generation": 3,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Julian"
+  },
+  {
+    "id": 11,
+    "firstName": "Maya",
+    "lastName": "Vance",
+    "gender": "female",
+    "birthDate": "2022-05-10",
+    "generation": 4,
+    "fatherId": 10,
+    "motherId": 7,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Maya"
+  },
+  {
+    "id": 12,
+    "firstName": "Leo",
+    "lastName": "Vance",
+    "gender": "male",
+    "birthDate": "2024-08-19",
+    "generation": 4,
+    "fatherId": 10,
+    "motherId": 7,
+    "spouseId": null,
+    "avatarUrl": "https://api.dicebear.com/7.x/notionists/svg?seed=Leo"
   }
 ]

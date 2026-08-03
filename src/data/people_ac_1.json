@@ -9,6 +9,7 @@
     "deathDate": "2012-11-23",
     "fatherId": null,
     "motherId": null,
-    "spouseIds": []
+    "spouseIds": [],
+    "generation":-2
   }
 ]
